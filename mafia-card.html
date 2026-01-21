@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mafia Business Card</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #1a0000 0%, #0d0000 50%, #1a0000 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Animated background particles */
+        .background-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .particle {
+            position: absolute;
+            background: radial-gradient(circle, rgba(139, 0, 0, 0.3) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float-particle 15s infinite ease-in-out;
+        }
+
+        @keyframes float-particle {
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+                opacity: 0.3;
+            }
+            50% {
+                transform: translate(50px, -50px) scale(1.5);
+                opacity: 0.6;
+            }
+        }
+
+        /* Main card container */
+        .card-container {
+            position: relative;
+            z-index: 1;
+            perspective: 1500px;
+        }
+
+        .mafia-card {
+            width: 700px;
+            min-height: 450px;
+            background: linear-gradient(135deg, #2d0a0a 0%, #1a0000 50%, #2d0a0a 100%);
+            border-radius: 25px;
+            padding: 50px;
+            position: relative;
+            box-shadow: 
+                0 20px 60px rgba(139, 0, 0, 0.5),
+                0 0 100px rgba(139, 0, 0, 0.3),
+                inset 0 0 50px rgba(0, 0, 0, 0.5);
+            border: 2px solid rgba(139, 0, 0, 0.3);
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            transform-style: preserve-3d;
+        }
+
+        /* Required Animation 2: Card highlight on hover */
+        .mafia-card:hover {
+            box-shadow: 
+                0 25px 80px rgba(220, 20, 60, 0.8),
+                0 0 150px rgba(220, 20, 60, 0.6),
+                inset 0 0 80px rgba(139, 0, 0, 0.4);
+            border-color: rgba(220, 20, 60, 0.8);
+            transform: translateY(-10px) rotateX(2deg);
+        }
+
+        /* Required Animation 3: Shake/vibration on hover */
+        .mafia-card:hover {
+            animation: card-shake 0.5s ease-in-out infinite;
+        }
+
+        @keyframes card-shake {
+            0%, 100% { transform: translateY(-10px) rotateX(2deg) translateX(0); }
+            25% { transform: translateY(-10px) rotateX(2deg) translateX(-2px); }
+            75% { transform: translateY(-10px) rotateX(2deg) translateX(2px); }
+        }
+
+        /* Required Animation 1: Falling snow */
+        .snow-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.5s;
+            overflow: hidden;
+            border-radius: 25px;
+        }
+
+        .mafia-card:hover .snow-container {
+            opacity: 1;
+        }
+
+        .snowflake {
+            position: absolute;
+            top: -10px;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1em;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(500px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Card inner glow effect */
+        .card-glow {
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(220, 20, 60, 0.2) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.5s;
+            pointer-events: none;
+        }
+
+        .mafia-card:hover .card-glow {
+            opacity: 1;
+            animation: rotate-glow 4s linear infinite;
+        }
+
+        @keyframes rotate-glow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Avatar section */
+        .avatar-section {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .avatar-placeholder {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #4a0000 0%, #8b0000 100%);
+            border: 4px solid rgba(220, 20, 60, 0.5);
+            box-shadow: 
+                0 10px 30px rgba(0, 0, 0, 0.5),
+                0 0 40px rgba(220, 20, 60, 0.3),
+                inset 0 0 30px rgba(0, 0, 0, 0.5);
+            position: relative;
+            transition: all 0.5s ease;
+        }
+
+        /* Extra Animation 1: Avatar pulse on hover */
+        .mafia-card:hover .avatar-placeholder {
+            animation: avatar-pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes avatar-pulse {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 
+                    0 10px 30px rgba(0, 0, 0, 0.5),
+                    0 0 40px rgba(220, 20, 60, 0.3);
+            }
+            50% {
+                transform: scale(1.1);
+                box-shadow: 
+                    0 15px 40px rgba(0, 0, 0, 0.7),
+                    0 0 60px rgba(220, 20, 60, 0.6);
+            }
+        }
+
+        .avatar-placeholder::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 50px;
+            height: 50px;
+            background: rgba(220, 20, 60, 0.2);
+            border-radius: 50%;
+        }
+
+        /* Main title - 3D animated MAFIA */
+        .title-section {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .mafia-title {
+            font-size: 90px;
+            font-weight: bold;
+            letter-spacing: 15px;
+            background: linear-gradient(45deg, 
+                #8b0000 0%, 
+                #dc143c 25%, 
+                #ff0000 50%, 
+                #dc143c 75%, 
+                #8b0000 100%);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 
+                3px 3px 0px rgba(139, 0, 0, 0.5),
+                6px 6px 0px rgba(70, 0, 0, 0.3),
+                9px 9px 0px rgba(35, 0, 0, 0.2);
+            transform-style: preserve-3d;
+            transition: all 0.5s ease;
+            position: relative;
+        }
+
+        /* Extra Animation 2: Gradient flow through text */
+        .mafia-title {
+            animation: gradient-flow 3s ease infinite;
+        }
+
+        @keyframes gradient-flow {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        /* Extra Animation 3: 3D rotation on hover */
+        .mafia-card:hover .mafia-title {
+            animation: title-rotate 2s ease-in-out infinite, gradient-flow 3s ease infinite;
+        }
+
+        @keyframes title-rotate {
+            0%, 100% {
+                transform: rotateY(0deg) rotateX(0deg);
+            }
+            25% {
+                transform: rotateY(5deg) rotateX(-3deg);
+            }
+            75% {
+                transform: rotateY(-5deg) rotateX(3deg);
+            }
+        }
+
+        /* Sparkle effect on title */
+        .mafia-title::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                rgba(255, 255, 255, 0.4) 50%, 
+                transparent 100%);
+            transform: translateX(-100%);
+        }
+
+        /* Extra Animation 4: Sparkle sweep effect */
+        .mafia-card:hover .mafia-title::after {
+            animation: sparkle-sweep 2s ease-in-out infinite;
+        }
+
+        @keyframes sparkle-sweep {
+            0% { transform: translateX(-100%); }
+            50%, 100% { transform: translateX(200%); }
+        }
+
+        /* Social links section */
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .social-link {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #4a0000 0%, #8b0000 100%);
+            border: 2px solid rgba(220, 20, 60, 0.4);
+            box-shadow: 
+                0 5px 15px rgba(0, 0, 0, 0.5),
+                0 0 20px rgba(139, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+        }
+
+        /* Extra Animation 5: Social link hover effects */
+        .social-link:hover {
+            transform: translateY(-10px) scale(1.2) rotate(360deg);
+            box-shadow: 
+                0 10px 30px rgba(220, 20, 60, 0.6),
+                0 0 40px rgba(220, 20, 60, 0.5);
+            border-color: rgba(220, 20, 60, 0.9);
+        }
+
+        .social-link::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(220, 20, 60, 0.4);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.5s, height 0.5s;
+        }
+
+        .social-link:hover::before {
+            width: 100%;
+            height: 100%;
+        }
+
+        .social-icon {
+            font-size: 28px;
+            color: #dc143c;
+            position: relative;
+            z-index: 1;
+            transition: color 0.3s ease;
+        }
+
+        .social-link:hover .social-icon {
+            color: #ffffff;
+            filter: drop-shadow(0 0 10px #ff0000);
+        }
+
+        /* Extra Animation 6: Floating animation for social links */
+        .social-link {
+            animation: float-social 3s ease-in-out infinite;
+        }
+
+        .social-link:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .social-link:nth-child(2) {
+            animation-delay: 0.3s;
+        }
+
+        .social-link:nth-child(3) {
+            animation-delay: 0.6s;
+        }
+
+        @keyframes float-social {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        /* Decorative corner elements */
+        .corner-decoration {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            pointer-events: none;
+        }
+
+        .corner-decoration::before,
+        .corner-decoration::after {
+            content: '';
+            position: absolute;
+            background: linear-gradient(45deg, #dc143c 0%, transparent 100%);
+            transition: all 0.5s ease;
+        }
+
+        .corner-decoration::before {
+            width: 2px;
+            height: 100%;
+        }
+
+        .corner-decoration::after {
+            width: 100%;
+            height: 2px;
+        }
+
+        .corner-top-left {
+            top: 20px;
+            left: 20px;
+        }
+
+        .corner-top-left::before {
+            left: 0;
+            top: 0;
+        }
+
+        .corner-top-left::after {
+            left: 0;
+            top: 0;
+        }
+
+        .corner-top-right {
+            top: 20px;
+            right: 20px;
+            transform: rotate(90deg);
+        }
+
+        .corner-bottom-left {
+            bottom: 20px;
+            left: 20px;
+            transform: rotate(-90deg);
+        }
+
+        .corner-bottom-right {
+            bottom: 20px;
+            right: 20px;
+            transform: rotate(180deg);
+        }
+
+        /* Extra Animation 7: Glowing corners on hover */
+        .mafia-card:hover .corner-decoration::before,
+        .mafia-card:hover .corner-decoration::after {
+            box-shadow: 0 0 20px rgba(220, 20, 60, 0.8);
+            background: linear-gradient(45deg, #ff0000 0%, #dc143c 100%);
+        }
+
+        /* Extra Animation 8: Ripple effect */
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(220, 20, 60, 0.3);
+            pointer-events: none;
+            transform: scale(0);
+            opacity: 0;
+        }
+
+        .mafia-card:hover .ripple {
+            animation: ripple-effect 2s ease-out infinite;
+        }
+
+        @keyframes ripple-effect {
+            0% {
+                transform: scale(0);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .mafia-card {
+                width: 90vw;
+                padding: 30px;
+                min-height: 350px;
+            }
+
+            .mafia-title {
+                font-size: 60px;
+                letter-spacing: 10px;
+            }
+
+            .avatar-placeholder {
+                width: 90px;
+                height: 90px;
+            }
+
+            .social-link {
+                width: 50px;
+                height: 50px;
+            }
+
+            .social-icon {
+                font-size: 22px;
+            }
+        }
+
+        /* Loading animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .mafia-card {
+            animation: fadeIn 1s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background particles -->
+    <div class="background-particles" id="particles"></div>
+
+    <!-- Main card -->
+    <div class="card-container">
+        <div class="mafia-card" id="mafiaCard">
+            <!-- Card glow effect -->
+            <div class="card-glow"></div>
+
+            <!-- Snow container -->
+            <div class="snow-container" id="snowContainer"></div>
+
+            <!-- Ripple effects -->
+            <div class="ripple" style="top: 25%; left: 25%; width: 100px; height: 100px;"></div>
+            <div class="ripple" style="top: 60%; left: 70%; width: 150px; height: 150px; animation-delay: 0.5s;"></div>
+
+            <!-- Corner decorations -->
+            <div class="corner-decoration corner-top-left"></div>
+            <div class="corner-decoration corner-top-right"></div>
+            <div class="corner-decoration corner-bottom-left"></div>
+            <div class="corner-decoration corner-bottom-right"></div>
+
+            <!-- Avatar section -->
+            <div class="avatar-section">
+                <div class="avatar-placeholder"></div>
+            </div>
+
+            <!-- Title section -->
+            <div class="title-section">
+                <h1 class="mafia-title">MAFIA</h1>
+            </div>
+
+            <!-- Social links -->
+            <div class="social-links">
+                <a href="https://t.me/" class="social-link" target="_blank" title="Telegram">
+                    <span class="social-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.02-1.96 1.25-5.54 3.67-.52.36-.99.53-1.42.52-.47-.01-1.37-.26-2.03-.48-.82-.27-1.47-.42-1.42-.88.03-.24.37-.48 1.02-.73 3.99-1.73 6.66-2.87 8-3.42 3.8-1.58 4.59-1.85 5.1-1.86.11 0 .37.03.53.17.14.11.17.26.19.37-.01.06.01.24 0 .38z"/>
+                        </svg>
+                    </span>
+                </a>
+                <a href="https://github.com/" class="social-link" target="_blank" title="GitHub">
+                    <span class="social-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z"/>
+                        </svg>
+                    </span>
+                </a>
+                <a href="https://reddit.com/" class="social-link" target="_blank" title="Reddit">
+                    <span class="social-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5.55 11.4c.03.15.05.31.05.48 0 2.44-2.84 4.42-6.34 4.42s-6.34-1.98-6.34-4.42c0-.17.02-.33.05-.48-.43-.26-.72-.73-.72-1.26 0-.81.66-1.47 1.47-1.47.39 0 .75.15 1.01.4 1-.72 2.37-1.19 3.89-1.24l.74-3.48c.01-.07.06-.12.13-.13l2.42-.52c.16-.48.62-.82 1.16-.82.68 0 1.23.55 1.23 1.23s-.55 1.23-1.23 1.23c-.64 0-1.17-.49-1.22-1.12l-2.18.47-.66 3.1c1.49.06 2.83.53 3.82 1.24.26-.25.62-.4 1.01-.4.81 0 1.47.66 1.47 1.47 0 .53-.29 1-.72 1.26zM9.77 13.23c0-.45-.36-.81-.81-.81s-.81.36-.81.81.36.81.81.81.81-.36.81-.81zm4.87 2.58c-.55.55-1.6.59-2.64.59s-2.09-.04-2.64-.59c-.11-.11-.11-.28 0-.39.11-.11.28-.11.39 0 .44.44 1.27.61 2.25.61s1.81-.17 2.25-.61c.11-.11.28-.11.39 0 .11.11.11.28 0 .39zm-.06-1.77c-.45 0-.81-.36-.81-.81s.36-.81.81-.81.81.36.81.81-.36.81-.81.81z"/>
+                        </svg>
+                    </span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Generate background particles
+        const particlesContainer = document.getElementById('particles');
+        for (let i = 0; i < 20; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.width = Math.random() * 100 + 50 + 'px';
+            particle.style.height = particle.style.width;
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.top = Math.random() * 100 + '%';
+            particle.style.animationDuration = Math.random() * 10 + 10 + 's';
+            particle.style.animationDelay = Math.random() * 5 + 's';
+            particlesContainer.appendChild(particle);
+        }
+
+        // Generate snowflakes
+        const snowContainer = document.getElementById('snowContainer');
+        function createSnowflakes() {
+            for (let i = 0; i < 50; i++) {
+                const snowflake = document.createElement('div');
+                snowflake.className = 'snowflake';
+                snowflake.textContent = '❄';
+                snowflake.style.left = Math.random() * 100 + '%';
+                snowflake.style.animationDuration = Math.random() * 3 + 2 + 's';
+                snowflake.style.animationDelay = Math.random() * 2 + 's';
+                snowflake.style.fontSize = Math.random() * 10 + 10 + 'px';
+                snowflake.style.opacity = Math.random() * 0.6 + 0.4;
+                snowContainer.appendChild(snowflake);
+            }
+        }
+        createSnowflakes();
+
+        // Add ripple effect on click
+        const card = document.getElementById('mafiaCard');
+        card.addEventListener('click', function(e) {
+            const ripple = document.createElement('div');
+            ripple.className = 'ripple';
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            ripple.style.left = x + 'px';
+            ripple.style.top = y + 'px';
+            ripple.style.width = '10px';
+            ripple.style.height = '10px';
+            card.appendChild(ripple);
+            
+            ripple.style.animation = 'ripple-effect 1s ease-out';
+            
+            setTimeout(() => {
+                ripple.remove();
+            }, 1000);
+        });
+
+        // Add mouse move parallax effect (Extra Animation 9)
+        document.addEventListener('mousemove', (e) => {
+            const card = document.querySelector('.mafia-card');
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left - rect.width / 2;
+            const y = e.clientY - rect.top - rect.height / 2;
+            
+            const rotateX = (y / rect.height) * 10;
+            const rotateY = (x / rect.width) * 10;
+            
+            if (card.matches(':hover')) {
+                card.style.transform = `
+                    translateY(-10px) 
+                    rotateX(${-rotateX}deg) 
+                    rotateY(${rotateY}deg)
+                `;
+            }
+        });
+
+        // Reset card rotation on mouse leave
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = '';
+        });
+    </script>
+</body>
+</html>
