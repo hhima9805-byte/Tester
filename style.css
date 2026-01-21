@@ -1,0 +1,336 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a0000 50%, #0a0a0a 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+}
+
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 2px,
+            rgba(139, 0, 0, 0.03) 2px,
+            rgba(139, 0, 0, 0.03) 4px
+        );
+    pointer-events: none;
+    animation: scanlines 8s linear infinite;
+}
+
+@keyframes scanlines {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(4px);
+    }
+}
+
+.container {
+    perspective: 1500px;
+    padding: 20px;
+}
+
+.business-card {
+    position: relative;
+    width: 600px;
+    height: 380px;
+    margin: 0 auto;
+    transition: transform 0.3s ease;
+}
+
+.business-card:hover {
+    transform: translateY(-10px);
+}
+
+.shadow {
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    height: 20px;
+    background: radial-gradient(ellipse at center, rgba(139, 0, 0, 0.4) 0%, transparent 70%);
+    filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.business-card:hover .shadow {
+    width: 85%;
+    opacity: 0.7;
+}
+
+.card-inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+}
+
+.card-front {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(145deg, #0d0d0d 0%, #1a0000 50%, #0d0d0d 100%);
+    border: 2px solid #8B0000;
+    border-radius: 15px;
+    padding: 40px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 
+        0 20px 60px rgba(0, 0, 0, 0.8),
+        0 0 0 1px rgba(139, 0, 0, 0.3),
+        inset 0 0 30px rgba(139, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card-front::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(139, 0, 0, 0.1) 0%, transparent 50%);
+    animation: pulse 4s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 0.3;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.6;
+        transform: scale(1.1);
+    }
+}
+
+.corner-decoration {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border: 2px solid #8B0000;
+}
+
+.corner-decoration.top-left {
+    top: 15px;
+    left: 15px;
+    border-right: none;
+    border-bottom: none;
+    border-top-left-radius: 5px;
+}
+
+.corner-decoration.top-right {
+    top: 15px;
+    right: 15px;
+    border-left: none;
+    border-bottom: none;
+    border-top-right-radius: 5px;
+}
+
+.corner-decoration.bottom-left {
+    bottom: 15px;
+    left: 15px;
+    border-right: none;
+    border-top: none;
+    border-bottom-left-radius: 5px;
+}
+
+.corner-decoration.bottom-right {
+    bottom: 15px;
+    right: 15px;
+    border-left: none;
+    border-top: none;
+    border-bottom-right-radius: 5px;
+}
+
+.card-header {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.logo {
+    width: 80px;
+    height: 80px;
+    filter: drop-shadow(0 5px 15px rgba(139, 0, 0, 0.6));
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.card-content {
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+.name {
+    font-size: 42px;
+    font-weight: bold;
+    color: #ffffff;
+    text-shadow: 
+        0 0 10px rgba(139, 0, 0, 0.5),
+        0 2px 4px rgba(0, 0, 0, 0.8),
+        0 0 30px rgba(139, 0, 0, 0.3);
+    letter-spacing: 3px;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+}
+
+.divider {
+    width: 200px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #8B0000, transparent);
+    margin: 15px auto;
+    box-shadow: 0 0 10px rgba(139, 0, 0, 0.5);
+}
+
+.title {
+    font-size: 24px;
+    color: #8B0000;
+    font-style: italic;
+    margin-bottom: 8px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.subtitle {
+    font-size: 18px;
+    color: #cccccc;
+    letter-spacing: 2px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.card-footer {
+    position: relative;
+    z-index: 1;
+}
+
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #cccccc;
+    font-size: 14px;
+    padding: 8px;
+    background: rgba(139, 0, 0, 0.1);
+    border-left: 2px solid #8B0000;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.contact-item:hover {
+    background: rgba(139, 0, 0, 0.2);
+    transform: translateX(5px);
+    border-left-width: 4px;
+}
+
+.contact-item .icon {
+    color: #8B0000;
+    font-size: 18px;
+    width: 24px;
+    text-align: center;
+    filter: drop-shadow(0 0 5px rgba(139, 0, 0, 0.5));
+}
+
+.quote {
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 11px;
+    color: #666;
+    font-style: italic;
+    text-align: center;
+    max-width: 80%;
+    padding: 8px;
+    border-top: 1px solid rgba(139, 0, 0, 0.3);
+    z-index: 1;
+}
+
+@media (max-width: 768px) {
+    .business-card {
+        width: 90vw;
+        height: auto;
+        min-height: 500px;
+    }
+    
+    .card-front {
+        padding: 30px 20px;
+    }
+    
+    .name {
+        font-size: 32px;
+    }
+    
+    .title {
+        font-size: 20px;
+    }
+    
+    .subtitle {
+        font-size: 16px;
+    }
+    
+    .contact-item {
+        font-size: 12px;
+    }
+    
+    .quote {
+        font-size: 9px;
+        bottom: 10px;
+    }
+}
+
+@keyframes glow {
+    0%, 100% {
+        box-shadow: 
+            0 20px 60px rgba(0, 0, 0, 0.8),
+            0 0 0 1px rgba(139, 0, 0, 0.3),
+            inset 0 0 30px rgba(139, 0, 0, 0.1);
+    }
+    50% {
+        box-shadow: 
+            0 20px 60px rgba(0, 0, 0, 0.8),
+            0 0 0 1px rgba(139, 0, 0, 0.6),
+            inset 0 0 30px rgba(139, 0, 0, 0.2),
+            0 0 40px rgba(139, 0, 0, 0.4);
+    }
+}
+
+.card-front {
+    animation: glow 3s ease-in-out infinite;
+}
