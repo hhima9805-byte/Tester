@@ -13,7 +13,7 @@
 
         body {
             font-family: 'Georgia', serif;
-            background: linear-gradient(135deg, #1a0000 0%, #0d0000 50%, #1a0000 100%);
+            background: #000000;
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -22,7 +22,7 @@
             position: relative;
         }
 
-        /* Animated background particles */
+        /* Subtle background particles - very dark */
         .background-particles {
             position: fixed;
             top: 0;
@@ -35,19 +35,19 @@
 
         .particle {
             position: absolute;
-            background: radial-gradient(circle, rgba(139, 0, 0, 0.3) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(70, 0, 0, 0.15) 0%, transparent 70%);
             border-radius: 50%;
-            animation: float-particle 15s infinite ease-in-out;
+            animation: float-particle 20s infinite ease-in-out;
         }
 
         @keyframes float-particle {
             0%, 100% {
                 transform: translate(0, 0) scale(1);
-                opacity: 0.3;
+                opacity: 0.2;
             }
             50% {
-                transform: translate(50px, -50px) scale(1.5);
-                opacity: 0.6;
+                transform: translate(30px, -30px) scale(1.3);
+                opacity: 0.4;
             }
         }
 
@@ -61,39 +61,39 @@
         .mafia-card {
             width: 700px;
             min-height: 450px;
-            background: linear-gradient(135deg, #2d0a0a 0%, #1a0000 50%, #2d0a0a 100%);
-            border-radius: 25px;
+            background: linear-gradient(135deg, #0a0a0a 0%, #000000 50%, #0a0a0a 100%);
+            border-radius: 20px;
             padding: 50px;
             position: relative;
             box-shadow: 
-                0 20px 60px rgba(139, 0, 0, 0.5),
-                0 0 100px rgba(139, 0, 0, 0.3),
-                inset 0 0 50px rgba(0, 0, 0, 0.5);
-            border: 2px solid rgba(139, 0, 0, 0.3);
+                0 20px 60px rgba(0, 0, 0, 0.9),
+                0 0 80px rgba(70, 0, 0, 0.2),
+                inset 0 0 30px rgba(0, 0, 0, 0.8);
+            border: 1px solid rgba(70, 0, 0, 0.3);
             overflow: hidden;
             transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
             transform-style: preserve-3d;
         }
 
-        /* Required Animation 2: Card highlight on hover */
+        /* Required Animation 2: Subtle red highlight on hover */
         .mafia-card:hover {
             box-shadow: 
-                0 25px 80px rgba(220, 20, 60, 0.8),
-                0 0 150px rgba(220, 20, 60, 0.6),
-                inset 0 0 80px rgba(139, 0, 0, 0.4);
-            border-color: rgba(220, 20, 60, 0.8);
+                0 25px 80px rgba(0, 0, 0, 0.95),
+                0 0 120px rgba(139, 0, 0, 0.4),
+                inset 0 0 40px rgba(70, 0, 0, 0.3);
+            border-color: rgba(139, 0, 0, 0.6);
             transform: translateY(-10px) rotateX(2deg);
         }
 
-        /* Required Animation 3: Shake/vibration on hover */
+        /* Required Animation 3: Subtle shake/vibration on hover */
         .mafia-card:hover {
-            animation: card-shake 0.5s ease-in-out infinite;
+            animation: card-shake 0.8s ease-in-out infinite;
         }
 
         @keyframes card-shake {
             0%, 100% { transform: translateY(-10px) rotateX(2deg) translateX(0); }
-            25% { transform: translateY(-10px) rotateX(2deg) translateX(-2px); }
-            75% { transform: translateY(-10px) rotateX(2deg) translateX(2px); }
+            25% { transform: translateY(-10px) rotateX(2deg) translateX(-1.5px); }
+            75% { transform: translateY(-10px) rotateX(2deg) translateX(1.5px); }
         }
 
         /* Required Animation 1: Falling snow */
@@ -105,9 +105,9 @@
             height: 100%;
             pointer-events: none;
             opacity: 0;
-            transition: opacity 0.5s;
+            transition: opacity 0.8s;
             overflow: hidden;
-            border-radius: 25px;
+            border-radius: 20px;
         }
 
         .mafia-card:hover .snow-container {
@@ -117,7 +117,7 @@
         .snowflake {
             position: absolute;
             top: -10px;
-            color: rgba(255, 255, 255, 0.8);
+            color: rgba(200, 200, 200, 0.5);
             font-size: 1em;
             animation: fall linear infinite;
         }
@@ -129,22 +129,22 @@
             }
         }
 
-        /* Card inner glow effect */
+        /* Subtle rotating glow effect */
         .card-glow {
             position: absolute;
             top: -50%;
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle, rgba(220, 20, 60, 0.2) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(139, 0, 0, 0.15) 0%, transparent 60%);
             opacity: 0;
-            transition: opacity 0.5s;
+            transition: opacity 0.8s;
             pointer-events: none;
         }
 
         .mafia-card:hover .card-glow {
             opacity: 1;
-            animation: rotate-glow 4s linear infinite;
+            animation: rotate-glow 6s linear infinite;
         }
 
         @keyframes rotate-glow {
@@ -156,40 +156,40 @@
         .avatar-section {
             display: flex;
             justify-content: center;
-            margin-bottom: 30px;
+            margin-bottom: 35px;
         }
 
         .avatar-placeholder {
             width: 120px;
             height: 120px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #4a0000 0%, #8b0000 100%);
-            border: 4px solid rgba(220, 20, 60, 0.5);
+            background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+            border: 3px solid rgba(139, 0, 0, 0.4);
             box-shadow: 
-                0 10px 30px rgba(0, 0, 0, 0.5),
-                0 0 40px rgba(220, 20, 60, 0.3),
-                inset 0 0 30px rgba(0, 0, 0, 0.5);
+                0 10px 30px rgba(0, 0, 0, 0.8),
+                0 0 30px rgba(70, 0, 0, 0.2),
+                inset 0 0 40px rgba(0, 0, 0, 0.9);
             position: relative;
             transition: all 0.5s ease;
         }
 
-        /* Extra Animation 1: Avatar pulse on hover */
+        /* Extra Animation 1: Subtle avatar pulse on hover */
         .mafia-card:hover .avatar-placeholder {
-            animation: avatar-pulse 1.5s ease-in-out infinite;
+            animation: avatar-pulse 2s ease-in-out infinite;
         }
 
         @keyframes avatar-pulse {
             0%, 100% {
                 transform: scale(1);
                 box-shadow: 
-                    0 10px 30px rgba(0, 0, 0, 0.5),
-                    0 0 40px rgba(220, 20, 60, 0.3);
+                    0 10px 30px rgba(0, 0, 0, 0.8),
+                    0 0 30px rgba(70, 0, 0, 0.2);
             }
             50% {
-                transform: scale(1.1);
+                transform: scale(1.05);
                 box-shadow: 
-                    0 15px 40px rgba(0, 0, 0, 0.7),
-                    0 0 60px rgba(220, 20, 60, 0.6);
+                    0 15px 40px rgba(0, 0, 0, 0.9),
+                    0 0 50px rgba(139, 0, 0, 0.4);
             }
         }
 
@@ -199,56 +199,67 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 50px;
-            height: 50px;
-            background: rgba(220, 20, 60, 0.2);
+            width: 40px;
+            height: 40px;
+            background: rgba(70, 0, 0, 0.15);
             border-radius: 50%;
         }
 
-        /* Main title - 3D animated MAFIA */
+        /* Main title - Elegant 3D MAFIA */
         .title-section {
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 45px;
             position: relative;
             z-index: 2;
         }
 
         .mafia-title {
-            font-size: 90px;
+            font-size: 85px;
             font-weight: bold;
-            letter-spacing: 15px;
-            background: linear-gradient(45deg, 
-                #8b0000 0%, 
-                #dc143c 25%, 
-                #ff0000 50%, 
-                #dc143c 75%, 
-                #8b0000 100%);
-            background-size: 300% 300%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            letter-spacing: 18px;
+            color: #1a1a1a;
             text-shadow: 
-                3px 3px 0px rgba(139, 0, 0, 0.5),
-                6px 6px 0px rgba(70, 0, 0, 0.3),
-                9px 9px 0px rgba(35, 0, 0, 0.2);
+                1px 1px 0px #8b0000,
+                2px 2px 0px #700000,
+                3px 3px 0px #5a0000,
+                4px 4px 0px #400000,
+                5px 5px 10px rgba(139, 0, 0, 0.4),
+                0 0 20px rgba(139, 0, 0, 0.2);
             transform-style: preserve-3d;
             transition: all 0.5s ease;
             position: relative;
+            font-family: 'Georgia', serif;
         }
 
-        /* Extra Animation 2: Gradient flow through text */
+        /* Extra Animation 2: Subtle glow pulse */
         .mafia-title {
-            animation: gradient-flow 3s ease infinite;
+            animation: text-glow-pulse 3s ease-in-out infinite;
         }
 
-        @keyframes gradient-flow {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
+        @keyframes text-glow-pulse {
+            0%, 100% {
+                text-shadow: 
+                    1px 1px 0px #8b0000,
+                    2px 2px 0px #700000,
+                    3px 3px 0px #5a0000,
+                    4px 4px 0px #400000,
+                    5px 5px 10px rgba(139, 0, 0, 0.4),
+                    0 0 20px rgba(139, 0, 0, 0.2);
+            }
+            50% {
+                text-shadow: 
+                    1px 1px 0px #a00000,
+                    2px 2px 0px #8b0000,
+                    3px 3px 0px #700000,
+                    4px 4px 0px #5a0000,
+                    5px 5px 15px rgba(139, 0, 0, 0.6),
+                    0 0 30px rgba(139, 0, 0, 0.3);
+            }
         }
 
-        /* Extra Animation 3: 3D rotation on hover */
+        /* Extra Animation 3: Subtle 3D rotation on hover */
         .mafia-card:hover .mafia-title {
-            animation: title-rotate 2s ease-in-out infinite, gradient-flow 3s ease infinite;
+            animation: title-rotate 3s ease-in-out infinite, text-glow-pulse 3s ease-in-out infinite;
         }
 
         @keyframes title-rotate {
@@ -256,14 +267,14 @@
                 transform: rotateY(0deg) rotateX(0deg);
             }
             25% {
-                transform: rotateY(5deg) rotateX(-3deg);
+                transform: rotateY(3deg) rotateX(-2deg);
             }
             75% {
-                transform: rotateY(-5deg) rotateX(3deg);
+                transform: rotateY(-3deg) rotateX(2deg);
             }
         }
 
-        /* Sparkle effect on title */
+        /* Elegant shine effect */
         .mafia-title::after {
             content: '';
             position: absolute;
@@ -273,17 +284,17 @@
             height: 100%;
             background: linear-gradient(90deg, 
                 transparent 0%, 
-                rgba(255, 255, 255, 0.4) 50%, 
+                rgba(139, 0, 0, 0.2) 50%, 
                 transparent 100%);
             transform: translateX(-100%);
         }
 
-        /* Extra Animation 4: Sparkle sweep effect */
+        /* Extra Animation 4: Subtle shine sweep */
         .mafia-card:hover .mafia-title::after {
-            animation: sparkle-sweep 2s ease-in-out infinite;
+            animation: shine-sweep 3s ease-in-out infinite;
         }
 
-        @keyframes sparkle-sweep {
+        @keyframes shine-sweep {
             0% { transform: translateX(-100%); }
             50%, 100% { transform: translateX(200%); }
         }
@@ -292,36 +303,38 @@
         .social-links {
             display: flex;
             justify-content: center;
-            gap: 30px;
+            gap: 35px;
             position: relative;
             z-index: 2;
         }
 
         .social-link {
-            width: 60px;
-            height: 60px;
+            width: 65px;
+            height: 65px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, #4a0000 0%, #8b0000 100%);
-            border: 2px solid rgba(220, 20, 60, 0.4);
+            background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+            border: 2px solid rgba(70, 0, 0, 0.4);
             box-shadow: 
-                0 5px 15px rgba(0, 0, 0, 0.5),
-                0 0 20px rgba(139, 0, 0, 0.3);
-            transition: all 0.3s ease;
+                0 5px 20px rgba(0, 0, 0, 0.8),
+                0 0 20px rgba(70, 0, 0, 0.2),
+                inset 0 0 20px rgba(0, 0, 0, 0.5);
+            transition: all 0.4s ease;
             position: relative;
             overflow: hidden;
             text-decoration: none;
         }
 
-        /* Extra Animation 5: Social link hover effects */
+        /* Extra Animation 5: Elegant social link hover */
         .social-link:hover {
-            transform: translateY(-10px) scale(1.2) rotate(360deg);
+            transform: translateY(-12px) scale(1.15);
             box-shadow: 
-                0 10px 30px rgba(220, 20, 60, 0.6),
-                0 0 40px rgba(220, 20, 60, 0.5);
-            border-color: rgba(220, 20, 60, 0.9);
+                0 10px 40px rgba(0, 0, 0, 0.9),
+                0 0 40px rgba(139, 0, 0, 0.5),
+                inset 0 0 30px rgba(70, 0, 0, 0.3);
+            border-color: rgba(139, 0, 0, 0.8);
         }
 
         .social-link::before {
@@ -331,10 +344,10 @@
             left: 50%;
             width: 0;
             height: 0;
-            background: rgba(220, 20, 60, 0.4);
+            background: rgba(70, 0, 0, 0.3);
             border-radius: 50%;
             transform: translate(-50%, -50%);
-            transition: width 0.5s, height 0.5s;
+            transition: width 0.4s, height 0.4s;
         }
 
         .social-link:hover::before {
@@ -343,21 +356,21 @@
         }
 
         .social-icon {
-            font-size: 28px;
-            color: #dc143c;
+            font-size: 30px;
+            color: #8b0000;
             position: relative;
             z-index: 1;
-            transition: color 0.3s ease;
+            transition: all 0.4s ease;
         }
 
         .social-link:hover .social-icon {
-            color: #ffffff;
-            filter: drop-shadow(0 0 10px #ff0000);
+            color: #dc143c;
+            filter: drop-shadow(0 0 8px rgba(139, 0, 0, 0.6));
         }
 
-        /* Extra Animation 6: Floating animation for social links */
+        /* Extra Animation 6: Subtle floating for social links */
         .social-link {
-            animation: float-social 3s ease-in-out infinite;
+            animation: float-social 4s ease-in-out infinite;
         }
 
         .social-link:nth-child(1) {
@@ -365,11 +378,11 @@
         }
 
         .social-link:nth-child(2) {
-            animation-delay: 0.3s;
+            animation-delay: 0.4s;
         }
 
         .social-link:nth-child(3) {
-            animation-delay: 0.6s;
+            animation-delay: 0.8s;
         }
 
         @keyframes float-social {
@@ -377,15 +390,15 @@
                 transform: translateY(0);
             }
             50% {
-                transform: translateY(-10px);
+                transform: translateY(-8px);
             }
         }
 
-        /* Decorative corner elements */
+        /* Elegant corner decorations */
         .corner-decoration {
             position: absolute;
-            width: 80px;
-            height: 80px;
+            width: 60px;
+            height: 60px;
             pointer-events: none;
         }
 
@@ -393,23 +406,23 @@
         .corner-decoration::after {
             content: '';
             position: absolute;
-            background: linear-gradient(45deg, #dc143c 0%, transparent 100%);
+            background: linear-gradient(45deg, rgba(139, 0, 0, 0.4) 0%, transparent 100%);
             transition: all 0.5s ease;
         }
 
         .corner-decoration::before {
-            width: 2px;
+            width: 1px;
             height: 100%;
         }
 
         .corner-decoration::after {
             width: 100%;
-            height: 2px;
+            height: 1px;
         }
 
         .corner-top-left {
-            top: 20px;
-            left: 20px;
+            top: 25px;
+            left: 25px;
         }
 
         .corner-top-left::before {
@@ -423,42 +436,38 @@
         }
 
         .corner-top-right {
-            top: 20px;
-            right: 20px;
+            top: 25px;
+            right: 25px;
             transform: rotate(90deg);
         }
 
         .corner-bottom-left {
-            bottom: 20px;
-            left: 20px;
+            bottom: 25px;
+            left: 25px;
             transform: rotate(-90deg);
         }
 
         .corner-bottom-right {
-            bottom: 20px;
-            right: 20px;
+            bottom: 25px;
+            right: 25px;
             transform: rotate(180deg);
         }
 
-        /* Extra Animation 7: Glowing corners on hover */
+        /* Extra Animation 7: Corner glow on hover */
         .mafia-card:hover .corner-decoration::before,
         .mafia-card:hover .corner-decoration::after {
-            box-shadow: 0 0 20px rgba(220, 20, 60, 0.8);
-            background: linear-gradient(45deg, #ff0000 0%, #dc143c 100%);
+            box-shadow: 0 0 15px rgba(139, 0, 0, 0.6);
+            background: linear-gradient(45deg, rgba(139, 0, 0, 0.7) 0%, rgba(70, 0, 0, 0.3) 100%);
         }
 
-        /* Extra Animation 8: Ripple effect */
+        /* Extra Animation 8: Ripple effect on click */
         .ripple {
             position: absolute;
             border-radius: 50%;
-            background: rgba(220, 20, 60, 0.3);
+            background: rgba(139, 0, 0, 0.3);
             pointer-events: none;
             transform: scale(0);
             opacity: 0;
-        }
-
-        .mafia-card:hover .ripple {
-            animation: ripple-effect 2s ease-out infinite;
         }
 
         @keyframes ripple-effect {
@@ -472,39 +481,100 @@
             }
         }
 
+        /* Extra Animation 9: Subtle border animation */
+        .mafia-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, 
+                transparent 0%, 
+                rgba(139, 0, 0, 0.3) 25%, 
+                transparent 50%, 
+                rgba(139, 0, 0, 0.3) 75%, 
+                transparent 100%);
+            background-size: 400% 400%;
+            border-radius: 20px;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        .mafia-card:hover::before {
+            opacity: 1;
+            animation: border-flow 4s linear infinite;
+        }
+
+        @keyframes border-flow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
         /* Responsive design */
         @media (max-width: 768px) {
             .mafia-card {
                 width: 90vw;
-                padding: 30px;
-                min-height: 350px;
+                padding: 35px;
+                min-height: 380px;
             }
 
             .mafia-title {
-                font-size: 60px;
-                letter-spacing: 10px;
+                font-size: 55px;
+                letter-spacing: 12px;
             }
 
             .avatar-placeholder {
-                width: 90px;
-                height: 90px;
+                width: 95px;
+                height: 95px;
             }
 
             .social-link {
-                width: 50px;
-                height: 50px;
+                width: 55px;
+                height: 55px;
             }
 
             .social-icon {
-                font-size: 22px;
+                font-size: 24px;
             }
         }
 
-        /* Loading animation */
+        @media (max-width: 480px) {
+            .mafia-card {
+                padding: 25px;
+            }
+
+            .mafia-title {
+                font-size: 42px;
+                letter-spacing: 8px;
+            }
+
+            .avatar-placeholder {
+                width: 80px;
+                height: 80px;
+            }
+
+            .social-links {
+                gap: 20px;
+            }
+
+            .social-link {
+                width: 48px;
+                height: 48px;
+            }
+
+            .social-icon {
+                font-size: 20px;
+            }
+        }
+
+        /* Smooth entrance animation */
         @keyframes fadeIn {
             from {
                 opacity: 0;
-                transform: translateY(30px);
+                transform: translateY(40px);
             }
             to {
                 opacity: 1;
@@ -513,7 +583,7 @@
         }
 
         .mafia-card {
-            animation: fadeIn 1s ease-out;
+            animation: fadeIn 1.2s ease-out;
         }
     </style>
 </head>
@@ -529,10 +599,6 @@
 
             <!-- Snow container -->
             <div class="snow-container" id="snowContainer"></div>
-
-            <!-- Ripple effects -->
-            <div class="ripple" style="top: 25%; left: 25%; width: 100px; height: 100px;"></div>
-            <div class="ripple" style="top: 60%; left: 70%; width: 150px; height: 150px; animation-delay: 0.5s;"></div>
 
             <!-- Corner decorations -->
             <div class="corner-decoration corner-top-left"></div>
@@ -554,21 +620,21 @@
             <div class="social-links">
                 <a href="https://t.me/" class="social-link" target="_blank" title="Telegram">
                     <span class="social-icon">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+                        <svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.02-1.96 1.25-5.54 3.67-.52.36-.99.53-1.42.52-.47-.01-1.37-.26-2.03-.48-.82-.27-1.47-.42-1.42-.88.03-.24.37-.48 1.02-.73 3.99-1.73 6.66-2.87 8-3.42 3.8-1.58 4.59-1.85 5.1-1.86.11 0 .37.03.53.17.14.11.17.26.19.37-.01.06.01.24 0 .38z"/>
                         </svg>
                     </span>
                 </a>
                 <a href="https://github.com/" class="social-link" target="_blank" title="GitHub">
                     <span class="social-icon">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+                        <svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z"/>
                         </svg>
                     </span>
                 </a>
                 <a href="https://reddit.com/" class="social-link" target="_blank" title="Reddit">
                     <span class="social-icon">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+                        <svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5.55 11.4c.03.15.05.31.05.48 0 2.44-2.84 4.42-6.34 4.42s-6.34-1.98-6.34-4.42c0-.17.02-.33.05-.48-.43-.26-.72-.73-.72-1.26 0-.81.66-1.47 1.47-1.47.39 0 .75.15 1.01.4 1-.72 2.37-1.19 3.89-1.24l.74-3.48c.01-.07.06-.12.13-.13l2.42-.52c.16-.48.62-.82 1.16-.82.68 0 1.23.55 1.23 1.23s-.55 1.23-1.23 1.23c-.64 0-1.17-.49-1.22-1.12l-2.18.47-.66 3.1c1.49.06 2.83.53 3.82 1.24.26-.25.62-.4 1.01-.4.81 0 1.47.66 1.47 1.47 0 .53-.29 1-.72 1.26zM9.77 13.23c0-.45-.36-.81-.81-.81s-.81.36-.81.81.36.81.81.81.81-.36.81-.81zm4.87 2.58c-.55.55-1.6.59-2.64.59s-2.09-.04-2.64-.59c-.11-.11-.11-.28 0-.39.11-.11.28-.11.39 0 .44.44 1.27.61 2.25.61s1.81-.17 2.25-.61c.11-.11.28-.11.39 0 .11.11.11.28 0 .39zm-.06-1.77c-.45 0-.81-.36-.81-.81s.36-.81.81-.81.81.36.81.81-.36.81-.81.81z"/>
                         </svg>
                     </span>
@@ -578,38 +644,38 @@
     </div>
 
     <script>
-        // Generate background particles
+        // Generate subtle background particles
         const particlesContainer = document.getElementById('particles');
-        for (let i = 0; i < 20; i++) {
+        for (let i = 0; i < 15; i++) {
             const particle = document.createElement('div');
             particle.className = 'particle';
-            particle.style.width = Math.random() * 100 + 50 + 'px';
+            particle.style.width = Math.random() * 80 + 40 + 'px';
             particle.style.height = particle.style.width;
             particle.style.left = Math.random() * 100 + '%';
             particle.style.top = Math.random() * 100 + '%';
-            particle.style.animationDuration = Math.random() * 10 + 10 + 's';
-            particle.style.animationDelay = Math.random() * 5 + 's';
+            particle.style.animationDuration = Math.random() * 15 + 15 + 's';
+            particle.style.animationDelay = Math.random() * 8 + 's';
             particlesContainer.appendChild(particle);
         }
 
-        // Generate snowflakes
+        // Generate elegant snowflakes
         const snowContainer = document.getElementById('snowContainer');
         function createSnowflakes() {
-            for (let i = 0; i < 50; i++) {
+            for (let i = 0; i < 40; i++) {
                 const snowflake = document.createElement('div');
                 snowflake.className = 'snowflake';
                 snowflake.textContent = '❄';
                 snowflake.style.left = Math.random() * 100 + '%';
-                snowflake.style.animationDuration = Math.random() * 3 + 2 + 's';
-                snowflake.style.animationDelay = Math.random() * 2 + 's';
-                snowflake.style.fontSize = Math.random() * 10 + 10 + 'px';
-                snowflake.style.opacity = Math.random() * 0.6 + 0.4;
+                snowflake.style.animationDuration = Math.random() * 4 + 3 + 's';
+                snowflake.style.animationDelay = Math.random() * 3 + 's';
+                snowflake.style.fontSize = Math.random() * 8 + 8 + 'px';
+                snowflake.style.opacity = Math.random() * 0.4 + 0.3;
                 snowContainer.appendChild(snowflake);
             }
         }
         createSnowflakes();
 
-        // Add ripple effect on click
+        // Elegant ripple effect on click
         const card = document.getElementById('mafiaCard');
         card.addEventListener('click', function(e) {
             const ripple = document.createElement('div');
@@ -623,22 +689,22 @@
             ripple.style.height = '10px';
             card.appendChild(ripple);
             
-            ripple.style.animation = 'ripple-effect 1s ease-out';
+            ripple.style.animation = 'ripple-effect 1.5s ease-out';
             
             setTimeout(() => {
                 ripple.remove();
-            }, 1000);
+            }, 1500);
         });
 
-        // Add mouse move parallax effect (Extra Animation 9)
+        // Subtle parallax effect on mouse move
         document.addEventListener('mousemove', (e) => {
             const card = document.querySelector('.mafia-card');
             const rect = card.getBoundingClientRect();
             const x = e.clientX - rect.left - rect.width / 2;
             const y = e.clientY - rect.top - rect.height / 2;
             
-            const rotateX = (y / rect.height) * 10;
-            const rotateY = (x / rect.width) * 10;
+            const rotateX = (y / rect.height) * 8;
+            const rotateY = (x / rect.width) * 8;
             
             if (card.matches(':hover')) {
                 card.style.transform = `
@@ -649,7 +715,7 @@
             }
         });
 
-        // Reset card rotation on mouse leave
+        // Reset card on mouse leave
         card.addEventListener('mouseleave', () => {
             card.style.transform = '';
         });
